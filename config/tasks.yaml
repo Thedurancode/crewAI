@@ -1,0 +1,97 @@
+gather_partner_data:
+  description: >
+    Identify and categorize current MLSE partners and potential advertisers, collecting relevant business details.
+  expected_output: >
+    A structured database of current partners categorized by industry, partnership type, and engagement level, along with a list of potential advertisers with their key business details.
+  agent: partner_knowledge_agent
+
+conduct_partner_research:
+  description: >
+    Perform in-depth research on potential partners and advertisers using the EXA API and other available sources.
+  expected_output: >
+    Comprehensive research reports on potential partners including company profiles, market position, previous sponsorship activities, and relevant industry data.
+  agent: research_agent
+  context:
+    - gather_partner_data
+
+identify_partnership_gaps:
+  description: >
+    Analyze the current partner portfolio and research data to identify gaps and opportunities in MLSE's partnerships.
+  expected_output: >
+    A detailed analysis highlighting missing partnership categories, underrepresented industries, and specific opportunities for new strategic partnerships.
+  agent: gap_identification_agent
+  context:
+    - gather_partner_data
+    - conduct_partner_research
+
+evaluate_partner_fit:
+  description: >
+    Evaluate potential partners using a scoring system based on relevance to MLSE, financial health, brand alignment, and strategic fit.
+  expected_output: >
+    A ranked list of potential partners with detailed fit scores across multiple criteria, including comparative analysis against current MLSE partners.
+  agent: partner_fit_score_agent
+  context:
+    - gather_partner_data
+    - conduct_partner_research
+    - identify_partnership_gaps
+
+refine_research_prompts:
+  description: >
+    Analyze initial research results and refine search queries to improve the quality and relevance of partnership research.
+  expected_output: >
+    Optimized search prompts and queries that yield more targeted and comprehensive research results for potential MLSE partners.
+  agent: prompt_refinement_agent
+  context:
+    - conduct_partner_research
+
+manage_research_data:
+  description: >
+    Verify, organize, and store all partnership research data in a structured database while preventing duplicates.
+  expected_output: >
+    A clean, well-organized database of partnership research with verified data integrity, no duplicates, and proper historical tracking.
+  agent: data_management_agent
+  context:
+    - gather_partner_data
+    - conduct_partner_research
+    - identify_partnership_gaps
+    - evaluate_partner_fit
+
+review_research_workflow:
+  description: >
+    Monitor and optimize the entire partnership research workflow, ensuring seamless collaboration between all agents.
+  expected_output: >
+    A workflow assessment report highlighting process efficiency, bottlenecks, and recommendations for improving the multi-agent research system.
+  agent: flow_review_agent
+  context:
+    - gather_partner_data
+    - conduct_partner_research
+    - identify_partnership_gaps
+    - evaluate_partner_fit
+    - refine_research_prompts
+    - manage_research_data
+
+create_video_presentation:
+  description: >
+    Create an engaging video presentation showcasing the most promising partnership opportunities for MLSE.
+  expected_output: >
+    A professional video presentation that effectively communicates partnership opportunities, featuring data visualizations, key insights, and strategic recommendations.
+  agent: video_presentation_agent
+  context:
+    - gather_partner_data
+    - conduct_partner_research
+    - identify_partnership_gaps
+    - evaluate_partner_fit
+    - manage_research_data
+
+generate_pdf_slideshow:
+  description: >
+    Generate a comprehensive PDF slideshow presenting partnership research findings and proposals.
+  expected_output: >
+    A professional PDF slideshow with clear sections for current partnership analysis, gap identification, potential partner profiles, and strategic recommendations.
+  agent: pdf_slideshow_agent
+  context:
+    - gather_partner_data
+    - conduct_partner_research
+    - identify_partnership_gaps
+    - evaluate_partner_fit
+    - manage_research_data
